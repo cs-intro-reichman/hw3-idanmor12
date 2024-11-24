@@ -31,7 +31,7 @@ public class Anagram {
 		String word1 = preProcess(str1);
 		String word2 = preProcess(str2);
 		Character currChar;
-		String letters = "abcdefghijklmnopqrstuvwxyz1234567890 ";
+		String letters = "abcdefghijklmnopqrstuvwxyz1234567890";
 
 		for (int i = 0; i < letters.length(); i++) {
 			currChar = letters.charAt(i);
