@@ -31,17 +31,26 @@ public class Anagram {
 		String word1 = preProcess(str1);
 		String word2 = preProcess(str2);
 		Character currChar;
-		if (word1.length() == word2.length()){
-			for (int i = 0; i < word1.length(); i++) {
-				currChar = word1.charAt(i);
-				if (word2.indexOf(word1.charAt(i)) != -1){
-					word2 = word2.replaceFirst(Character.toString(currChar), "");
-				} else {
-					return false;
+		String letters = "abcdefghijklmnopqrstuvwxyz1234567890 ";
+
+		for (int i = 0; i < letters.length(); i++) {
+			currChar = letters.charAt(i);
+			int counter1 = 0;
+			int counter2 = 0;
+
+			for (int j = 0; j < word1.length(); j++) {
+				if (word1.charAt(j) == currChar) {
+					counter1++;
+				}
+			} 
+			for (int j = 0; j < word2.length(); j++) {
+				if (word2.charAt(j) == currChar) {
+					counter2++;
 				}
 			}
-		} else {
-			return false;
+			if (counter1 != counter2) {
+				return false;
+			}
 		}
 		
 		return true;
@@ -52,9 +61,9 @@ public class Anagram {
 	// as is. For example, the string "What? No way!" becomes "whatnoway"
 	public static String preProcess(String str) {
 		String lowerCased = str.toLowerCase();
-		String letters = "abcdefghijklmnopqrstuvwxyz";
+		String letters = "abcdefghijklmnopqrstuvwxyz1234567890 ";
 		String preProcessedWord = "";
-		for (int i = 0; i < lowerCased.length(); i++) {
+		for (int i = 0; i < lowerCased.length(); i++) { 
 			if (letters.indexOf(lowerCased.charAt(i)) != -1) {
 				preProcessedWord = preProcessedWord + lowerCased.charAt(i);
 			} 
@@ -68,6 +77,7 @@ public class Anagram {
 	public static String randomAnagram(String str) {
 		String anagram = "";
 		int randomCharIndex;
+		str = preProcess(str);
 		int length = str.length();
 		for (int i = 0; i < length; i++) {
 			randomCharIndex = (int) (Math.random() * str.length());
