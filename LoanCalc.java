@@ -46,13 +46,10 @@ public class LoanCalc {
 		while (true) {
 			iterationCounter += 1;
 			double balance = endBalance(loan, rate, n, payment);
-			if (Math.abs(balance) < epsilon) {
+			if (Math.abs(balance) <= epsilon) {
 				return payment;
-			} else if (balance > 0) {
+			} 
 				payment += epsilon;
-			} else {
-				payment -= epsilon;
-			}
 		}
     }
     
