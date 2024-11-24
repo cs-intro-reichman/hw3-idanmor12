@@ -7,10 +7,10 @@ public class Algebra {
 	public static void main(String args[]) {
 	    // Tests some of the operations
 	    // System.out.println(plus(2,3));   // 2 + 3
-		System.out.println(minus(7,2));  // 7 - 2
-   		System.out.println(minus(2,7)); 
-	    System.out.println(minus(-7,2));  // 7 - 2
-   		System.out.println(minus(-2,-7));  // 2 - 7
+		// System.out.println(minus(7,2));  // 7 - 2
+   		// System.out.println(minus(2,7)); 
+	    // System.out.println(minus(-7,2));  // 7 - 2
+   		System.out.println(minus(10,-7));  // 2 - 7
  		// System.out.println(times(3,4));  // 3 * 4
    		// System.out.println(plus(2,times(4,2)));  // 2 + 4 * 2
    		// System.out.println(pow(5,3));      // 5^3
@@ -50,30 +50,24 @@ public class Algebra {
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
-		boolean isNegativeResult = (x1 < 0 && x2 > 0) || (x1 > 0 && x2 < 0) || (x1 < 0 && x2 < 0);
-		int newx1= x1;
-		int newx2= x2;
-		if (x1 < 0) {
-			newx1 = absoluteValue(x1);
-		}
-		if (x2 < 0) {
-			newx2 = absoluteValue(x2);
-		}
-		if (x1 < 0 && x2 < 0){
-			for (int i = 0; i < newx2; i++) {
-				newx1++;
+		if (x2 >= 0){
+			for (int i = 0; i < x2; i++) {
+				x1--;
 			}
 		} else {
-			for (int i = 0; i < newx2; i++) {
-				newx1--;
+			for (int i = x2; i < 0; i++) {
+				x1++;
 			}
 		}
-		
-		return isNegativeResult ? -newx1 : newx1;
+		return x1;
 	}
 
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
+		if (x1 == 0 || x2 == 0){
+			return 0;
+		}
+
 		boolean isNegativeResult = (x1 < 0 && x2 > 0) || (x1 > 0 && x2 < 0);
 		if (x1 < 0) {
 			x1 = absoluteValue(x1);
@@ -92,6 +86,9 @@ public class Algebra {
 
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
+		if (n==0){
+			return 1;
+		}
 		int newValue = x;
 		for (int i = 0; i < n-1; i++) {
 			newValue = times(newValue, x);
@@ -138,10 +135,15 @@ public class Algebra {
 	public static int sqrt(int x) {
 		int newNumber = 0;
 		int counter = 0;
+		if (x == 0){
+			return 0;
+		}
+
 		while (newNumber < x){
 			newNumber = times(counter, counter);
 			counter++;
 		}
+		
 		if (newNumber == x){
 			counter--;
 			return counter;
