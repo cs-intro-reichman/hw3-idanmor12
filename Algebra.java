@@ -6,10 +6,11 @@
 public class Algebra {
 	public static void main(String args[]) {
 	    // Tests some of the operations
-		System.out.println(div(-2,1));
 	    // System.out.println(plus(2,3));   // 2 + 3
-	    // System.out.println(minus(7,2));  // 7 - 2
-   		// System.out.println(minus(2,7));  // 2 - 7
+		System.out.println(minus(7,2));  // 7 - 2
+   		System.out.println(minus(2,7)); 
+	    System.out.println(minus(-7,2));  // 7 - 2
+   		System.out.println(minus(-2,-7));  // 2 - 7
  		// System.out.println(times(3,4));  // 3 * 4
    		// System.out.println(plus(2,times(4,2)));  // 2 + 4 * 2
    		// System.out.println(pow(5,3));      // 5^3
@@ -21,7 +22,7 @@ public class Algebra {
    		// System.out.println(mod(120,6));  // 120 % 6    
    		// System.out.println(sqrt(36));
 		// System.out.println(sqrt(263169));
-   		// System.out.println(sqrt(76123));
+   		//System.out.println(sqrt(76123));
 	}  
 
 	public static int absoluteValue(int x){
@@ -49,17 +50,26 @@ public class Algebra {
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
+		boolean isNegativeResult = (x1 < 0 && x2 > 0) || (x1 > 0 && x2 < 0) || (x1 < 0 && x2 < 0);
+		int newx1= x1;
+		int newx2= x2;
+		if (x1 < 0) {
+			newx1 = absoluteValue(x1);
+		}
 		if (x2 < 0) {
-			x2 = absoluteValue(x2);
-			for (int i = 0; i < x2; i++) {
-				x1--;
+			newx2 = absoluteValue(x2);
+		}
+		if (x1 < 0 && x2 < 0){
+			for (int i = 0; i < newx2; i++) {
+				newx1++;
 			}
 		} else {
-			for (int i = 0; i < x2; i++) {
-				x1++;
+			for (int i = 0; i < newx2; i++) {
+				newx1--;
 			}
 		}
-		return x1;
+		
+		return isNegativeResult ? -newx1 : newx1;
 	}
 
 	// Returns x1 * x2
